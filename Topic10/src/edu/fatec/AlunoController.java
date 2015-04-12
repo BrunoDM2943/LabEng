@@ -33,27 +33,26 @@ public class AlunoController extends HttpServlet {
 	/**
 	 * @see Servlet#init(ServletConfig)
 	 */
+	@SuppressWarnings("unchecked")
 	public void init(ServletConfig config) throws ServletException {
-		// TODO Auto-generated method stub
+		ServletContext context = config.getServletContext();
+		Object obj = context.getAttribute("ALUNOS");
+		if (obj == null) {
+			lsAlunos = new HashSet<Aluno>();
+			context.setAttribute("ALUNOS", lsAlunos);
+		} else{
+			lsAlunos = (Set<Aluno>) obj;
+		}
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
-	@SuppressWarnings("unchecked")
+	
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		
-		ServletContext context = request.getSession().getServletContext();
-		Object obj = context.getAttribute("lsAlunos");
-		if (obj == null) {
-			lsAlunos = new HashSet<Aluno>();
-			context.setAttribute("lsAlunos", lsAlunos);
-		} else{
-			lsAlunos = (Set<Aluno>) obj;
-		}
-
+				
 		String id = request.getParameter("id");
 		String ra = request.getParameter("ra");
 		String nome = request.getParameter("nome");
@@ -66,13 +65,15 @@ public class AlunoController extends HttpServlet {
 		aluno.setNome(nome);
 		aluno.setIdade(Integer.parseInt(idade));
 		aluno.setSexo(sexo);
-
-		response.setContentType( "text/html" );
-		if(lsAlunos.add(aluno)){
-			response.sendRedirect("aluno.jsp?add=Aluno " + aluno.getNome() + " adicionado com sucesso!" );
-		}else{
-			response.sendRedirect("aluno.jsp?add=Aluno " + aluno.getNome() + " já existia na base!" );
+		
+		String cmd = request.getParameter("cmd");
+		if("adicionar".equals(cmd)){
+			response.setContentType( "text/html" );
+			lsAlunos.add(aluno);
+			response.sendRedirect("aluno.jsp");
 		}
+
+		
 		
 		
 		

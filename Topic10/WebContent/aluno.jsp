@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" import="edu.fatec.*"%>
+    pageEncoding="ISO-8859-1" import="edu.fatec.*" import="java.util.Set" import="javax.servlet.ServletContext"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -17,9 +17,25 @@
 	Idade <input type="text" name="idade"><br>
 	Sexo <input type="text" name="sexo"><p>
 	
-	<input type="submit" name="cmdAdd" value="Adicionar" /> <p>
+	<table>
 	
-	<%= request.getParameter("add") %>
+	<% ServletContext context = request.getSession().getServletContext();
+	   Set<Aluno> lsAlunos = (Set<Aluno>) context.getAttribute("ALUNOS");
+	   if(lsAlunos != null){
+	   for(Aluno a : lsAlunos){
+	   %>
+	<tr>
+		<td><%= a.getId() %></td>
+		<td><%= a.getRa() %></td>
+		<td><%= a.getNome() %></td>
+		<td><%= a.getIdade() %></td>
+		<td><%= a.getSexo() %></td>	
+	</tr>	
+	<%}
+	  }%>
+	</table>
+	
+	<%= request.getParameter("resp") %>
 </form>
 
 
