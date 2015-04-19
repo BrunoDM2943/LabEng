@@ -17,6 +17,12 @@
 	Idade <input type="text" name="idade"><br>
 	Sexo <input type="text" name="sexo"><p>
 	
+	<input type="submit" name="cmd" value="adicionar"/>
+	<input type="submit" name="cmd" value="pesquisar"/>
+	
+	<%if(request.getAttribute("aluno") != null){%>
+		Aluno encontrado = <%= request.getAttribute("aluno").toString() %>
+	<%} %> 
 	<table>
 	
 	<% ServletContext context = request.getSession().getServletContext();
@@ -35,7 +41,7 @@
 	  }%>
 	</table>
 	
-	<%= request.getParameter("resp") %>
+	
 </form>
 
 

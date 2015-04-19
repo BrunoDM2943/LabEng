@@ -52,7 +52,30 @@ public class AlunoController extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-				
+		
+		Aluno aluno = null;
+		
+		String cmd = request.getParameter("cmd");
+		if("adicionar".equals(cmd)){			
+			lsAlunos.add(carregarAluno(request));
+			response.sendRedirect("aluno.jsp");
+		} else if ("pesquisa".equals(cmd)) {
+			String id = request.getParameter("id");
+			
+			for(Aluno a : lsAlunos){
+				if(a.getId() == Long.parseLong(id)){
+					aluno = a;
+					break;
+				}
+			}
+			request.setAttribute("aluno", aluno);
+		}
+		response.setContentType( "text/html" );
+	
+		response.sendRedirect("aluno.jsp");
+	}
+	
+	private Aluno carregarAluno(HttpServletRequest request){
 		String id = request.getParameter("id");
 		String ra = request.getParameter("ra");
 		String nome = request.getParameter("nome");
@@ -66,17 +89,7 @@ public class AlunoController extends HttpServlet {
 		aluno.setIdade(Integer.parseInt(idade));
 		aluno.setSexo(sexo);
 		
-		String cmd = request.getParameter("cmd");
-		if("adicionar".equals(cmd)){
-			response.setContentType( "text/html" );
-			lsAlunos.add(aluno);
-			response.sendRedirect("aluno.jsp");
-		}
-
-		
-		
-		
-		
+		return aluno;
 	}
 
 }
