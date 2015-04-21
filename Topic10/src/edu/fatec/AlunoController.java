@@ -68,6 +68,16 @@ public class AlunoController extends HttpServlet {
 				}
 			}
 			request.setAttribute("aluno", aluno);
+		} else if("remover".equals(cmd)) {
+			String id = request.getParameter("id");
+			aluno = new Aluno();
+			aluno.setId(Long.parseLong(id));
+			lsAlunos.remove(aluno);
+			
+		} else if("atualizar".equals(cmd)){
+			aluno = carregarAluno(request);
+			lsAlunos.remove(aluno);
+			lsAlunos.add(aluno);
 		}
 		response.setContentType("text/html");
 

@@ -12,6 +12,7 @@
 
 	<jsp:useBean id="aluno" class="edu.fatec.Aluno" scope="page" />
 	<jsp:setProperty name="aluno" property="*" />
+	<div align="left">
 	<form action="AlunoController" method="get">
 		<table id="tblFormAluno" cellspacing="5px" align="left">
 			<tr>
@@ -42,9 +43,8 @@
 			</tr>
 
 		</table>
-
 	</form>
-
+	</div>
 	<br>
 	<%
 		if (request.getAttribute("aluno") != null) {
@@ -54,8 +54,6 @@
 	<%
 		}
 	%>
-
-	<br>
 	<table id="tblAlunos" align="left">
 		<tr>
 			<th>ID</th>
@@ -82,9 +80,5 @@
 			}
 		%>
 	</table>
-
-
-
-</body>
 </body>
 </html>
