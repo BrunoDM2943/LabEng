@@ -47,7 +47,7 @@ public class JogoController extends HttpServlet {
 		String cmd = request.getParameter("cmd");
 		if ("adicionar".equals(cmd)) {
 			lsJogos.add(carregarJogo(request));
-		} else if ("pesquisa".equals(cmd)) {
+		} else if ("pesquisar".equals(cmd)) {
 			String nome = request.getParameter("nome");
 
 			for (Jogo j : lsJogos) {
@@ -72,7 +72,7 @@ public class JogoController extends HttpServlet {
 	 */
 	private Jogo carregarJogo(HttpServletRequest request) {
 		String nome = request.getParameter("nome");
-		Dificuldade dificuldade = Dificuldade.valueOf(request.getParameter("dificuldade"));
+		Dificuldade dificuldade = Dificuldade.valueOf(request.getParameter("dificuldade").toUpperCase());
 
 		Jogo jogo = new Jogo();
 		jogo.setNome(nome);

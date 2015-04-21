@@ -12,8 +12,39 @@ package edu.fatec;
  */
 public enum Dificuldade {
 	
-	FACIL,
-	MEDIO,
-	DIFICIL,
-	MUITO_DIFICIL;
+	FACIL("Facil"),
+	MEDIO("Medio"),
+	DIFICIL("Dificil");
+	
+	String dificuldade;
+
+	/**
+	 * @param dificuldade
+	 */
+	private Dificuldade(String dificuldade) {
+		this.dificuldade = dificuldade;
+	}
+	
+		
+	/* (non-Javadoc)
+	 * @see java.lang.Enum#toString()
+	 */
+	@Override
+	public String toString() {
+		return dificuldade;
+	}
+
+	/**
+	 * @return the dificuldade
+	 */
+	public String getDificuldade() {
+		return dificuldade;
+	}
+
+	/**
+	 * @param dificuldade the dificuldade to set
+	 */
+	public void setDificuldade(String dificuldade) {
+		this.dificuldade = dificuldade;
+	}
 }
